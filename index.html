@@ -28,7 +28,7 @@
       'link1': 'a5NwFatL',
       'link2': 'a5NwFatL',
       'link3': 'a5NwFatL'
-    }
+    };
   // jwplayer('mediaplayer').setup({
   //     // 'fileflash': '/jwplayer/jwplayer.flash.swf',
   //     // 'file': 'https://jwp.io/s/mwMXTedh',
@@ -39,8 +39,8 @@
   //     'height': '520'
   // });
   
-  (function() {
-
+  (function(){
+ 
 
 
   var apiRoute = 'https://cdn.jwplayer.com/v2/playlists/',
@@ -53,8 +53,8 @@
   var setupPlayer = function(thisFeed) {
     // Initialize the player
     playerInstance = jwplayer('mediaplayer').setup({
-      // playlist: 'https://cdn.jwplayer.com/v2/playlists/a5NwFatL',
-      file: 'src/DO NOT OPEN - 1 Minute Film.mp4',
+      'playlist': 'https://cdn.jwplayer.com/v2/playlists/a5NwFatL',
+      // file: 'src\Animation.mp4',
       visualplaylist: true,
       width: '780',
       height: '520',
@@ -67,7 +67,7 @@
 
     setupPlayer();
 
-    playerInstance.on('complete', function() {
+    playerInstance.on('pause', function() {
       console.log('klick me baby');
     // Move the timeslider in-line with other controls
     var playerContainer = playerInstance.getContainer();
@@ -77,8 +77,10 @@
     div1.appendChild(node);
     playerContainer.appendChild(div1,playerInstance);
 
-  });
 
+  });
+    
+ 
 
 
 })();

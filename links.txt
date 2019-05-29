@@ -1,0 +1,27 @@
+https://stackoverflow.com/questions/28344799/how-to-play-video-in-jwplayer-when-onclick-function-called-playlist
+
+We're using playListItem() currently, which is resulting in a neverending loading spinner.
+
+jwplayer("myid").setup({
+// setup config
+}).playlistItem(3);
+
+
+
+## fire event in specific time :
+
+https://stackoverflow.com/questions/20056329/jwplayer-call-event-on-80-percent-of-video
+
+https://stackoverflow.com/questions/41119348/add-an-image-frame-to-display-after-the-video-in-jwplayer
+
+
+## Funny video :)
+
+https://codepen.io/simsketch/pen/eBwwxe
+
+
+## Add poster on specific time:
+
+jwplayer('player').load({
+          "image": "newimage.jpg"
+      });
