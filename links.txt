@@ -25,3 +25,30 @@ https://codepen.io/simsketch/pen/eBwwxe
 jwplayer('player').load({
           "image": "newimage.jpg"
       });
+
+
+
+
+
+
+
+
+### on time event:
+
+playerInstance.on('time',function(event) {
+  console.log('event on time   ')
+
+   if (event.position > event.duration * 0.8) {
+    playerInstance.pause();
+    alert("we are on 80%");
+}
+});
+
+
+
+### adding on click functionality
+https://stackoverflow.com/questions/18691475/changing-jwplayer-video-on-click
+
+
+##call file by video url
+  file: "http://content.jwplatform.com/videos/9460YL96.mp4",
