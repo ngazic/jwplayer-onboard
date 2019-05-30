@@ -22,7 +22,6 @@
     <a href="#" class="btn1" data-video-name="" data-video-id="">Button 1</a>
     <a href="#" class="btn2" data-video-name="" data-video-id="">Button 2</a>
     <a href="#" class="btn3" data-video-name="" data-video-id="">Button 3</a>
-    <input id="tmpID" type="hidden" value="" />
   </div>
 
 
@@ -61,7 +60,8 @@
       var btn2 = document.getElementsByClassName('btn2')[0];
       var btn3 = document.getElementsByClassName('btn3')[0];
       var hiddenID = document.getElementById('tmpID');
-      var tmpVideos = hiddenID.value;
+      var tmpVideosArray = Object.getOwnPropertyNames(videoIDs);
+      var tmpVideosArrayIndex = 0;
       var isLoopVideoAcive =true;
       var apiRoute = "http://content.jwplatform.com/videos/";
       var setupPlayer = function (thisFeed) {
@@ -86,22 +86,20 @@
         var btn1 = document.getElementsByClassName('btn1')[0];
         var btn2 = document.getElementsByClassName('btn2')[0];
         var btn3 = document.getElementsByClassName('btn3')[0];
-        hiddenID.value = videoIDs.video_1.name;
-        tmpVideos = hiddenID.value;
-        console.log(videoIDs[tmpVideos].video_A.name)
+        console.log(videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.name)
   
         if(isLoopVideoAcive){
           playerInstance.load({
-            file: apiRoute + videoIDs[tmpVideos].loopVideo.id,
+            file: apiRoute + videoIDs[tmpVideosArray[tmpVideosArrayIndex]].loopVideo.id,
             repeat: true
           }).play();
         btnContainer.classList.remove("hidden");
-        btn1.setAttribute('data-video-id', videoIDs[tmpVideos].video_A.id);
-        btn1.setAttribute('data-video-name', videoIDs[tmpVideos].video_A.name);
-        btn2.setAttribute('data-video-id', videoIDs[tmpVideos].video_B.id);
-        btn2.setAttribute('data-video-name', videoIDs[tmpVideos].video_B.name);
-        btn3.setAttribute('data-video-id', videoIDs[tmpVideos].video_C.id);
-        btn3.setAttribute('data-video-name', videoIDs[tmpVideos].video_C.name);
+        btn1.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.id);
+        btn1.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.name);
+        btn2.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.id);
+        btn2.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.name);
+        btn3.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.id);
+        btn3.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.name);
 
         } else {
         btnContainer.classList.add("hidden");
@@ -117,12 +115,9 @@
         var el = e.target;
         var id = el.getAttribute('data-video-id');
         var name = el.getAttribute('data-video-name');
-        console.log(id);
-        console.log(name);
-        console.log(tmpVideos);
-        console.log('video validity is : '+videoIDs[tmpVideos][name].valid)
-        if (videoIDs[tmpVideos][name].valid) {
+        if (videoIDs[tmpVideosArray[tmpVideosArrayIndex]][name].valid) {
          console.log('this option is good!!');
+         tmpVideosArrayIndex ++;
          isLoopVideoAcive = false;
         } else {
           console.log('this option is not good!!');
@@ -134,6 +129,10 @@
             }).play();
 
         btnContainer.classList.toggle("hidden");
+        console.log(tmpVideosArrayIndex+"  index of object videos");
+        console.log("array length is :  "+tmpVideosArray.length)
+        if(tmpVideosArrayIndex == tmpVideosArray.length)
+        alert("no more video to show, that's all folks")
       }
 
 
