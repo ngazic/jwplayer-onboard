@@ -26,6 +26,15 @@
 
 
   <script type="text/javascript">
+    /*
+    =====================================
+    --- EDITABLE PART ---
+    edit this object videos id or add 
+    as many  new videos you want. You must
+    have to keep your video extension within
+    "id" property.
+    =====================================
+    */
     var videoIDs = {
       "video_1": {
         "id": "7vR8CjU6.mp4",
@@ -51,6 +60,13 @@
         }
       }
     };
+
+    /*
+    ============================================
+    ---  NON EDITABLE PART ---
+    logic for playing videos :
+    ============================================
+    */
 
     (function () {
 
@@ -110,7 +126,6 @@
       btn2.onclick = btnEventCallback;
       btn3.onclick = btnEventCallback;
 
-
       function btnEventCallback(e) {
         var el = e.target;
         var id = el.getAttribute('data-video-id');
@@ -123,19 +138,13 @@
           console.log('this option is not good!!');
           isLoopVideoAcive =true;
         }
-            playerInstance.load({
-              file: apiRoute + id
-              
-            }).play();
-
+        playerInstance.load({
+          file: apiRoute + id
+        }).play();
         btnContainer.classList.toggle("hidden");
-        console.log(tmpVideosArrayIndex+"  index of object videos");
-        console.log("array length is :  "+tmpVideosArray.length)
         if(tmpVideosArrayIndex == tmpVideosArray.length)
-        alert("no more video to show, that's all folks")
+        alert("this is the last video in playlist for now ")
       }
-
-
     })();
   </script>
 </body>
