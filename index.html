@@ -19,9 +19,9 @@
   <br><br>
   <div id="mediaplayer"></div>
   <div class="options-container hidden">
-    <a href="#" class="btn1" data-video-name="" data-video-id="">Button 1</a>
-    <a href="#" class="btn2" data-video-name="" data-video-id="">Button 2</a>
-    <a href="#" class="btn3" data-video-name="" data-video-id="">Button 3</a>
+    <a href="#" class="btn1" data-video-name="" data-video-id=""><object id="object1"  data="" type="image/svg+xml" ></object></a>
+    <a href="#" class="btn2" data-video-name="" data-video-id=""><object id="object2" data="" type="image/svg+xml"></object></a>
+    <a href="#" class="btn3" data-video-name="" data-video-id=""><object id="object3"  data="" type="image/svg+xml"></object></a>
   </div>
 
 
@@ -42,23 +42,97 @@
         "video_A": {
           "id": "vhFckVXt.mp4",
           "name": "video_A",
-          "valid": false
+          "valid": false,
+          "button": {
+            "id": "bnt2",
+            "src": "btn-icons/1-2A.svg"
+          }
         },
         "video_B": {
           "id": "9460YL96.mp4",
           "name": "video_B",
-          "valid": false
+          "valid": false,
+          "button": {
+            "id": "bnt3",
+            "src": "btn-icons/1-2B.svg"
+          }
         },
         "video_C": {
           "id": "2fNizj8p.mp4",
           "name": "video_C",
-          "valid": true
+          "valid": true,
+          "button": {
+            "id": "bnt1",
+            "src": "btn-icons/1-2C.svg"
+          }
         },
-        "loopVideo": {
-          "id": "Zm4PxpaQ.mp4",
-          "name": "loopVideo"
-        }
-      }
+        "loopVideo": "Zm4PxpaQ.mp4"
+      },
+      "video_2": {
+        "id": "7vR8CjU6.mp4",
+        "name": "video_1",
+        "video_A": {
+          "id": "vhFckVXt.mp4",
+          "name": "video_A",
+          "valid": false,
+          "button": {
+            "id": "bnt3",
+            "src": "btn-icons/2-2A.svg"
+          }
+        },
+        "video_B": {
+          "id": "9460YL96.mp4",
+          "name": "video_B",
+          "valid": false,
+          "button": {
+            "id": "bnt1",
+            "src": "btn-icons/2-2B.svg"
+          }
+        },
+        "video_C": {
+          "id": "2fNizj8p.mp4",
+          "name": "video_C",
+          "valid": true,
+          "button": {
+            "id": "bnt2",
+            "src": "btn-icons/2-2C.svg"
+          }
+        },
+        "loopVideo": "Zm4PxpaQ.mp4"
+      },
+      "video_3": {
+        "id": "7vR8CjU6.mp4",
+        "name": "video_1",
+        "video_A": {
+          "id": "vhFckVXt.mp4",
+          "name": "video_A",
+          "valid": false,
+          "button": {
+            "id": "bnt1",
+            "src": "btn-icons/3-2A.svg"
+          }
+        },
+        "video_B": {
+          "id": "9460YL96.mp4",
+          "name": "video_B",
+          "valid": false,
+          "button": {
+            "id": "bnt2",
+            "src": "btn-icons/3-2B.svg"
+          }
+        },
+        "video_C": {
+          "id": "2fNizj8p.mp4",
+          "name": "video_C",
+          "valid": true,
+          "button": {
+            "id": "bnt3",
+            "src": "btn-icons/3-2C.svg"
+          }
+        },
+        "loopVideo": "Zm4PxpaQ.mp4"
+      },
+      "finalLoop": ""
     };
 
     /*
@@ -75,11 +149,20 @@
       var btn1 = document.getElementsByClassName('btn1')[0];
       var btn2 = document.getElementsByClassName('btn2')[0];
       var btn3 = document.getElementsByClassName('btn3')[0];
-      var hiddenID = document.getElementById('tmpID');
+      var obj1 = document.getElementById('object1');
+      var obj2 = document.getElementById('object2');
+      var obj3 = document.getElementById('object3');
       var tmpVideosArray = Object.getOwnPropertyNames(videoIDs);
       var tmpVideosArrayIndex = 0;
-      var isLoopVideoAcive =true;
+      var isLoopVideoAcive = true;
       var apiRoute = "http://content.jwplatform.com/videos/";
+
+      /*
+      ================================
+      SETUP PLAYER
+      ================================
+      */
+
       var setupPlayer = function (thisFeed) {
         // Initialize the player
         playerInstance = jwplayer('mediaplayer').setup({
@@ -95,30 +178,36 @@
       };
 
       setupPlayer();
-      console.log(playerInstance.getPlaylist());
+
+      /*
+     ================================
+      PLAYER ON COMPLETE EVENT 
+     ================================
+     */
+
       playerInstance.on('complete', function () {
         var playerContainer = playerInstance.getContainer();
         playerContainer.appendChild(btnContainer, playerInstance);
-        var btn1 = document.getElementsByClassName('btn1')[0];
-        var btn2 = document.getElementsByClassName('btn2')[0];
-        var btn3 = document.getElementsByClassName('btn3')[0];
-        console.log(videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.name)
-  
-        if(isLoopVideoAcive){
+        if (isLoopVideoAcive) {
           playerInstance.load({
-            file: apiRoute + videoIDs[tmpVideosArray[tmpVideosArrayIndex]].loopVideo.id,
+            file: apiRoute + videoIDs[tmpVideosArray[tmpVideosArrayIndex]].loopVideo,
             repeat: true
           }).play();
-        btnContainer.classList.remove("hidden");
-        btn1.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.id);
-        btn1.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A.name);
-        btn2.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.id);
-        btn2.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.name);
-        btn3.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.id);
-        btn3.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.name);
+          btnContainer.classList.remove("hidden");
+
+          // btn2.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.id);
+          // btn2.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B.name);
+          // btn3.setAttribute('data-video-id', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.id);
+          // btn3.setAttribute('data-video-name', videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C.name);
+          btnText();
 
         } else {
-        btnContainer.classList.add("hidden");
+          btnContainer.classList.add("hidden");
+          playerInstance.load({
+            file: apiRoute + videoIDs[tmpVideosArray[tmpVideosArrayIndex]].id,
+            repeat: true
+          }).play();
+          isLoopVideoAcive = true;
         }
 
       });
@@ -126,25 +215,70 @@
       btn2.onclick = btnEventCallback;
       btn3.onclick = btnEventCallback;
 
+       /*
+     ================================
+     EVENT CALLBACK FOR BUTTONS 
+     ================================
+     */
       function btnEventCallback(e) {
         var el = e.target;
         var id = el.getAttribute('data-video-id');
         var name = el.getAttribute('data-video-name');
         if (videoIDs[tmpVideosArray[tmpVideosArrayIndex]][name].valid) {
-         console.log('this option is good!!');
-         tmpVideosArrayIndex ++;
-         isLoopVideoAcive = false;
+          console.log('this option is good!!');
+          console.log(name);
+          tmpVideosArrayIndex++;
+          isLoopVideoAcive = false;
+          console.log('this is good option');
         } else {
           console.log('this option is not good!!');
-          isLoopVideoAcive =true;
+          console.log(name);
+          isLoopVideoAcive = true;
         }
         playerInstance.load({
           file: apiRoute + id
         }).play();
         btnContainer.classList.toggle("hidden");
-        if(tmpVideosArrayIndex == tmpVideosArray.length)
-        alert("this is the last video in playlist for now ")
+        if (tmpVideosArrayIndex == tmpVideosArray.length) {
+          isLoopVideoAcive = true;
+          tmpVideosArrayIndex--;
+        }
       }
+
+     /*
+     ================================
+      ADD SVG TO BUTTON
+     ================================
+     */
+      function btnText() {
+        var optionTxtArray = [videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_A,
+          videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_B,
+          videoIDs[tmpVideosArray[tmpVideosArrayIndex]].video_C
+        ];
+        optionTxtArray.forEach(function (videoOption) {
+          if (videoOption.button.id === 'bnt1') {
+            obj1.setAttribute('data', videoOption.button.src);
+            btn1.setAttribute('data-video-id', videoOption.id);
+            btn1.setAttribute('data-video-name', videoOption.name);
+          } else if (videoOption.button.id === 'bnt2') {
+            obj2.setAttribute('data', videoOption.button.src);
+            btn2.setAttribute('data-video-id', videoOption.id);
+            btn2.setAttribute('data-video-name', videoOption.name);
+          } else {
+            obj3.setAttribute('data', videoOption.button.src);
+            btn3.setAttribute('data-video-id', videoOption.id);
+            btn3.setAttribute('data-video-name', videoOption.name);
+          }
+
+        });
+      }
+      //disable pause video
+      // playerInstance.on('click',function () {
+      //   playerInstance.play();
+      // });
+
+
+
     })();
   </script>
 </body>

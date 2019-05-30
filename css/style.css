@@ -8,10 +8,11 @@
 
 .options-container {
   position: absolute;
-  /* text-align: center; */
+  text-align: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 585px;
 }
 
 .hidden {
@@ -23,14 +24,17 @@
   text-decoration: none;
   color: #fff;
   display: inline-block;
-  padding: 10px 20px 20px 10px;
 }
 
 .options-container a:hover {
   background-color: red;
-  transform: scale(1.4);
+  /* transform: scale(1.1); */
 
 }
+
+/* .jw-controlbar {
+  display:none !important;
+} */
 
 /* .jw-svg-icon-replay path {    
   display: none;
