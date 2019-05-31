@@ -45,10 +45,9 @@
     transform: scale(1.1);
 }
 
-
-/* .jw-controlbar {
-  display:none !important;
-} */
+.jw-controlbar {
+    display: none !important;
+}
 
 
 /* .jw-svg-icon-replay path {    
