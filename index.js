@@ -149,9 +149,10 @@ var videoIDs = {
         // Initialize the player
         playerInstance = jwplayer("mediaplayer").setup({
             file: apiRoute + "videos/" + videoIDs.slo.video_1.id + ".mp4",
+            label: "180p ",
             wmode: "transparent",
             autostart: false,
-            volume: 20,
+            volume: 100,
             image: apiRoute + "/v2/media/CeM08rHL/poster.jpg"
 
         });
