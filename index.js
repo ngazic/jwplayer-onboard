@@ -136,7 +136,7 @@ var videoIDs = {
     var isNotFinalLoop = true;
     var tmpVideosArray = Object.getOwnPropertyNames(videoIDs.slo);
     var tmpVideosArrayIndex = 0;
-    var apiRoute = "http://content.jwplatform.com/videos/";
+    var apiRoute = "http://content.jwplatform.com/";
     var playerContainer = null;
 
     /*
@@ -148,11 +148,12 @@ var videoIDs = {
     var setupPlayer = function(thisFeed) {
         // Initialize the player
         playerInstance = jwplayer("mediaplayer").setup({
-            file: "http://content.jwplatform.com/videos/" + videoIDs.slo.video_1.id + ".mp4",
+            file: apiRoute + "videos/" + videoIDs.slo.video_1.id + ".mp4",
             wmode: "transparent",
             autostart: false,
             volume: 20,
-            image: "logo.png"
+            image: apiRoute + "/v2/media/CeM08rHL/poster.jpg"
+
         });
     };
 
@@ -171,20 +172,20 @@ var videoIDs = {
         if (isLoopVideoAcive) {
             if (isNotFinalLoop) {
                 playerInstance.load({
-                    file: apiRoute + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].loopVideo
+                    file: apiRoute + "videos/" + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].loopVideo
                 }).play();
                 btnText();
                 btnContainer.classList.remove("hidden");
             } else {
                 playerInstance.load({
-                    file: apiRoute + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
+                    file: apiRoute + "videos/" + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
                 }).play();
                 iconRestart.classList.remove("hidden");
             }
         } else {
             btnContainer.classList.add("hidden");
             playerInstance.load({
-                file: apiRoute + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
+                file: apiRoute + "videos/" + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
             }).play();
             isLoopVideoAcive = true;
         }
@@ -210,7 +211,7 @@ var videoIDs = {
             isLoopVideoAcive = true;
         }
         playerInstance.load({
-            file: apiRoute + id
+            file: apiRoute + "videos/" + id
         }).play();
         btnContainer.classList.toggle("hidden");
         if (tmpVideosArrayIndex == tmpVideosArray.length - 1) {
@@ -265,7 +266,7 @@ var videoIDs = {
             iconRestart.classList.add("hidden");
             tmpVideosArrayIndex = 0;
             playerInstance.load({
-                file: apiRoute + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
+                file: apiRoute + "videos/" + videoIDs["slo"][tmpVideosArray[tmpVideosArrayIndex]].id
             }).play();
             isNotFinalLoop = true;
         }
